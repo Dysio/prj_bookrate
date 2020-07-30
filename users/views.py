@@ -10,8 +10,8 @@ def register_view(request):
         if form.is_valid():
             form.save()
             username = form.cleaned_data.get('username')
-            messages.success(request, f'Account created for {username}')
-            return redirect('book-home')
+            messages.success(request, f'Account created for {username}. Now you can login.')
+            return redirect('login')
     else:
         form = UserRegistrationForm()
     return render(request, 'users/register.html', {'form':form})

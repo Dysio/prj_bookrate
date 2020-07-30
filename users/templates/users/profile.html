@@ -1,5 +1,11 @@
-{%  extends "book/base.html" %}
+{% extends "book/base.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
-    <h1>{{ user.username }}</h1>
+    <div class="content-section">
+        <div class="media">
+        <img class="rounded-circle account-image" src="{{ user.profile.image.url }}">
+            <h1>{{ user.username }}</h1>
+            <p>{{ user.email }}</p>
+        </div>
+    </div>
 {% endblock %}

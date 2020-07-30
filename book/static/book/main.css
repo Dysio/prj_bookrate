@@ -14,3 +14,8 @@ h1
 .site-header .navbar-nav .nav-link.active {
   font-weight: 500;
 }
+
+.account-image{
+    height: 60px;
+    width: 60px;
+}
