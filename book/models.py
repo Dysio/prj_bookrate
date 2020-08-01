@@ -7,7 +7,7 @@ class Book(models.Model):
     title = models.CharField(max_length=200, blank=False, null=False)
     author = models.CharField(max_length=200, blank=False, null=False)
     year = models.IntegerField(default=None, blank=True, null=True)
-    description = models.TextField()
+    description = models.TextField(default='Book description.')
     image = models.ImageField(default='book.jpg', upload_to='book_covers')
 
     def __str__(self):
