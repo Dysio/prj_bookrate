@@ -1,4 +1,23 @@
 {%  extends "book/base.html" %}
 {% block content %}
-    <h1>Blog home!</h1>
+    <article class="media content-section">
+        <div class="media-body">
+            <h1>Blog home!</h1>
+            <p>Some text to test if all works properly.</p>
+        </div>
+    </article>
+
+    {% for book in books %}
+        <article class="media content-section">
+            <h3>{{ forloop.counter }}</h3>
+            <img class="article-img" src="{{ book.image.url }}">
+            <div class="media-body">
+                <div class="article-metadata">
+                  <a class="mr-2" href="#">{{ book.title }}</a>
+                  <a class="mr-2" href="#">{{ book.author }}</a>
+                </div>
+                <p class="article-content">{{ book.description }}</p>
+            </div>
+        </article>
+    {% endfor %}
 {% endblock %}
