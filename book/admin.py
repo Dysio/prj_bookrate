@@ -1,4 +1,11 @@
 from django.contrib import admin
-from .models import Book
+from .models import Book, Rate
 
-admin.site.register(Book)
+class BookAdmin(admin.ModelAdmin):
+    list_display = ['title','author','year']
+
+class RateAdmin(admin.ModelAdmin):
+    list_display = ['book','user','rate']
+
+admin.site.register(Book, BookAdmin)
+admin.site.register(Rate, RateAdmin)

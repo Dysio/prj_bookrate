@@ -1,3 +1,5 @@
+from django.contrib.auth.models import User
+from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 import uuid
 from PIL import Image
@@ -22,3 +24,17 @@ class Book(models.Model):
             output_size = (300, 300)
             img.thumbnail(output_size)
             img.save(self.image.path)
+
+
+class Rate(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4)
+    book = models.ForeignKey(Book, on_delete=models.PROTECT)
+    user = models.ForeignKey(User, on_delete=models.PROTECT)
+    rate = models.IntegerField(validators=[MinValueValidator(1),
+                                           MaxValueValidator(5)])
+
+    def __str__(self):
+        return f'{self.book} user: {self.user}'
+
+    class Meta:
+        unique_together = ['book','user']

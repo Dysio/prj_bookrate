@@ -14,9 +14,12 @@
             <div class="media-body">
                 <div class="article-metadata">
                   <a class="mr-2" href="#">{{ book.title }}</a>
-                  <a class="mr-2" href="#">{{ book.author }}</a>
+                  <a class="mr-2" href="#">author: {{ book.author }}</a>
                 </div>
                 <p class="article-content">{{ book.description }}</p>
+            </div>
+            <div>
+                <h3>Rate</h3>
             </div>
         </article>
     {% endfor %}
