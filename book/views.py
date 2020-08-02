@@ -14,5 +14,11 @@ def home_view(request):
 class BookDetailView(DetailView):
     model = Book
 
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(BookDetailView, self).get_context_data(object_list=object_list, **kwargs)
+        form = RateForm()
+        context.update({'form':form})
+        return context
+
 def about_view(request):
     return render(request, 'book/about.html',{"title":"About"})
