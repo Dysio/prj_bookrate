@@ -1,0 +1,44 @@
+[
+  {
+    "title": "The Witcher: Sword of destiny",
+    "author": "A.Sapkowski",
+    "year": 1992,
+    "description":"6 stories"
+  },
+    {
+    "title": "The Witcher: The Last Wish",
+    "author": "A.Sapkowski",
+    "year": 1993,
+    "description":"7 stories. Its stories (including both its original stories and the stories which it republishes from The Witcher) take place before Sword of Destiny even though it was published later."
+  },
+  {
+    "title": "The Witcher: The Blood of Elves",
+    "author": "A.Sapkowski",
+    "year": 1994,
+    "description":"Pentalogy part 1"
+  },
+    {
+    "title": "The Witcher: Time of Contempt",
+    "author": "A.Sapkowski",
+    "year": 1995,
+    "description":"Pentalogy part 2"
+  },
+  {
+    "title": "The Witcher: Baptism of Fire",
+    "author": "A.Sapkowski",
+    "year": 1996,
+    "description":"Pentalogy part 3"
+  },
+  {
+    "title": "The Witcher: The Tower of Swallows",
+    "author": "A.Sapkowski",
+    "year": 1997,
+    "description":"Pentalogy part 4"
+  },
+    {
+    "title": "The Witcher: Lady of the Lake",
+    "author": "A.Sapkowski",
+    "year": 1999,
+    "description":"Pentalogy part 5"
+  }
+]
