@@ -12,10 +12,12 @@
         </div>
         <div>
             <h3>Rate</h3>
-            <p>{{ form }}</p>
-            <div class="form-group">
-                <button class="btn btn-outline-info" type="submit">Vote</button>
-            </div>
+            {% if user.is_authenticated %}
+                <p>{{ form }}</p>
+                <div class="form-group">
+                    <button class="btn btn-outline-info" type="submit">Vote</button>
+                </div>
+            {% endif %}
         </div>
     </article>
 {% endblock %}

@@ -28,8 +28,8 @@ class Book(models.Model):
 
 class Rate(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4)
-    book = models.ForeignKey(Book, on_delete=models.PROTECT)
-    user = models.ForeignKey(User, on_delete=models.PROTECT)
+    book = models.ForeignKey(Book, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     rate = models.IntegerField(validators=[MinValueValidator(1),
                                            MaxValueValidator(5)])
 

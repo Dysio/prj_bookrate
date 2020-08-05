@@ -40,5 +40,23 @@
     "author": "A.Sapkowski",
     "year": 1999,
     "description":"Pentalogy part 5"
+  },
+    {
+    "title": "Altered Carbon",
+    "author": "Richard K. Morgan",
+    "year": 2002,
+    "description":"Takeshi Kovacs novels part 1"
+  },
+      {
+    "title": "Broken Angels",
+    "author": "Richard K. Morgan",
+    "year": 2003,
+    "description":"Takeshi Kovacs novels part 2"
+  },
+      {
+    "title": "Woken Furies",
+    "author": "Richard K. Morgan",
+    "year": 2005,
+    "description":"Takeshi Kovacs novels part 3"
   }
 ]

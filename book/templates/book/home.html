@@ -18,9 +18,17 @@
                   <a class="mr-2" href="#">author: {{ book.author }}</a>
                 </div>
                 <p class="article-content">{{ book.description }}</p>
+                <p class="article-content">{{ book.id }}</p>
             </div>
             <div>
                 <h3>Rate</h3>
+{#                <p>{{ rates.filter(book_id=book.id).first().rate }}</p>#}
+                {% for rate in rates %}
+                    {% if rate.book_id == book.id and rate.user_id == user.id %}
+                        <h3>{{ rate.rate }}</h3>
+                    {% else %}
+                    {% endif %}
+                {% endfor %}
             </div>
         </article>
     {% endfor %}

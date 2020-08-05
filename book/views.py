@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views.generic import DetailView, ListView
-from book.models import Book
+from book.models import Book, Rate
 from .forms import RateForm
 
 # Create your views here.
@@ -18,6 +18,11 @@ class BookListView(ListView):
     ordering = ['title']
     paginate_by = 5
 
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(BookListView, self).get_context_data(object_list=object_list, **kwargs)
+        context['rates'] = Rate.objects.all()
+        return context
+
 class BookDetailView(DetailView):
     model = Book
 
@@ -25,6 +30,7 @@ class BookDetailView(DetailView):
         context = super(BookDetailView, self).get_context_data(object_list=object_list, **kwargs)
         form = RateForm()
         context.update({'form':form})
+        context['rates'] = Rate.objects.all()
         return context
 
 def about_view(request):

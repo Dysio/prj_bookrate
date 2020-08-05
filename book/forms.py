@@ -9,7 +9,6 @@ class RateForm(forms.ModelForm):
         widget=forms.Select(choices=RATINGS),
     )
 
-
     class Meta:
         model = Rate
-        fields = ('rate',)
+        fields = ['rate',]
