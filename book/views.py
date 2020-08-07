@@ -1,12 +1,12 @@
-from django.shortcuts import render
-from django.views import View
-from django.views.generic import DetailView, ListView, TemplateView
+from django.http import HttpResponse
+from django.shortcuts import render, redirect
+from django.urls import reverse_lazy
+from django.views.generic import DetailView, ListView, TemplateView, FormView
 from book.models import Book, Rate
 from .forms import RateForm
 
 # Create your views here.
 def home_view(request):
-    form = RateForm(request.POST)
     context = {
         'books':Book.objects.all()
     }
@@ -34,9 +34,15 @@ class BookDetailView(DetailView):
         context['rates'] = Rate.objects.all()
         return context
 
-class BookRateView(View):
-    model = Book
-    template_name = 'book/rate_partial_view.html'
+class BookRateView(TemplateView):
+    model = Rate
+    template_name = 'book/book_rate.html'
+
+class BookRateFormView(FormView):
+    model = Rate
+    template_name = 'book/book_rate_form.html'
+    form_class = RateForm
+    success_url = reverse_lazy('book-home')
 
 class RatePartialView(DetailView):
     model = Rate

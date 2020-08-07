@@ -1,5 +1,6 @@
 {%  extends "book/base.html" %}
 {% load crispy_forms_tags %}
+{% load render_partial %}
 {% block content %}
     <article class="media content-section">
         <img class="article-img" src="{{ object.image.url }}">
@@ -13,11 +14,17 @@
         <div>
             <h3>Rate</h3>
             {% if user.is_authenticated %}
-                <p>{{ form }}</p>
-                <div class="form-group">
-                    <button class="btn btn-outline-info" type="submit">Vote</button>
-                </div>
+{#                <form method="post">#}
+{#                    {% csrf_token %}#}
+{#                    {{ form }}#}
+{#                    <div class="form-group">#}
+{#                        <button class="btn btn-outline-info" type="submit">Vote</button>#}
+{#                    </div>#}
+{#                </form>#}
+                {% render_partial 'book-rate-form' %}
+
             {% endif %}
+
         </div>
     </article>
 {% endblock %}

@@ -29,11 +29,10 @@
                     {% else %}
                     {% endif %}
                 {% endfor %}
-{#                {% with some_var=2 %}#}
-{#                  {% render_partial 'rate-partial_view' arg1=40 arg2=some_var %}#}
-{#                  {% render_partial 'book-detail-rate' %}#}
-{#                  {% render_partial 'book.views.RatePartialView' %}#}
-{#                {% endwith %}#}
+{#              {% with some_var=2 %}#}
+{#                 {% render_partial 'rate-partial_view' arg1=40 arg2=some_var %}#}
+                {% render_partial 'book-rate' %}
+{#              {% endwith %}#}
             </div>
         </article>
     {% endfor %}

@@ -8,7 +8,9 @@ class RateForm(forms.ModelForm):
         label='rate',
         widget=forms.Select(choices=RATINGS),
     )
+    book_id = forms.CharField()
+    user_id = forms.CharField()
 
     class Meta:
         model = Rate
-        fields = ['rate',]
+        fields = ['rate', 'book_id', 'user_id']
