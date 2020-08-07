@@ -1,5 +1,6 @@
 {%  extends "book/base.html" %}
 {% load crispy_forms_tags %}
+{% load render_partial %}
 {% block content %}
     <article class="media content-section">
         <div class="media-body">
@@ -18,7 +19,6 @@
                   <a class="mr-2" href="#">author: {{ book.author }}</a>
                 </div>
                 <p class="article-content">{{ book.description }}</p>
-                <p class="article-content">{{ book.id }}</p>
             </div>
             <div>
                 <h3>Rate</h3>
@@ -29,6 +29,11 @@
                     {% else %}
                     {% endif %}
                 {% endfor %}
+{#                {% with some_var=2 %}#}
+{#                  {% render_partial 'rate-partial_view' arg1=40 arg2=some_var %}#}
+{#                  {% render_partial 'book-detail-rate' %}#}
+{#                  {% render_partial 'book.views.RatePartialView' %}#}
+{#                {% endwith %}#}
             </div>
         </article>
     {% endfor %}

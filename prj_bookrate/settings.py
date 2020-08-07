@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'book.apps.BookConfig',
     'users.apps.UsersConfig',
     'crispy_forms',
+    'django_render_partial',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
