@@ -1,5 +1,41 @@
 [
   {
+    "title": "The Lord of the Rings: The Fellowship of the Ring",
+    "author": "J. R. R. Tolkien",
+    "year": 1954,
+    "description":"Part 1"
+  },
+    {
+    "title": "The Lord of the Rings: Two Towers",
+    "author": "J. R. R. Tolkien",
+    "year": 1954,
+    "description":"Part 2"
+  },
+    {
+    "title": "The Lord of the Rings: Return Of The King",
+    "author": "J. R. R. Tolkien",
+    "year": 1955,
+    "description":"Part 3"
+  },
+  {
+    "title": "Hobbit",
+    "author": "J. R. R. Tolkien",
+    "year": 1937,
+    "description":"The Hobbit or There and Back Again"
+  },
+    {
+    "title": "The Chronicles of Narnia: The Lion, the Witch and the Wardrobe",
+    "author": "C. S. Lewis",
+    "year": 1950,
+    "description":"Book description"
+  },
+  {
+    "title": "The Chronicles of Narnia: Prince Caspian",
+    "author": "C. S. Lewis",
+    "year": 1951,
+    "description":"Book description"
+  },
+  {
     "title": "The Witcher: Sword of destiny",
     "author": "A.Sapkowski",
     "year": 1992,

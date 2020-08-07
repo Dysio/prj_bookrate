@@ -10,6 +10,8 @@
               <a class="mr-2" href="#">author: {{ object.author }}</a>
             </div>
             <p class="article-content">{{ object.description }}</p>
+            <a>user_id = {{ user.id }}</a>
+            <a>book_id = {{ object.id }}</a>
         </div>
         <div>
             <h3>Rate</h3>
@@ -21,7 +23,7 @@
 {#                        <button class="btn btn-outline-info" type="submit">Vote</button>#}
 {#                    </div>#}
 {#                </form>#}
-                {% render_partial 'book-rate-form' %}
+{#                {% render_partial 'book-rate-form' %}#}
 
             {% endif %}
 
