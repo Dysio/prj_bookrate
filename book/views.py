@@ -63,7 +63,11 @@ class BookRateFormView(FormView):
             messages.success(request=self.request, message="Voted!")
             form.save()
             return redirect(reverse('book-home'))
-        return render(request, self.template_name, {'form':form})
+        else:
+            # messages.error(request=self.request, message=form.errors, extra_tags='danger')
+            messages.error(request=self.request, message='Rate test with this Book and User already exists.', extra_tags='danger')
+            # return render(request, self.template_name, {'form':form})
+            return redirect(reverse('book-home'))
 
 
 

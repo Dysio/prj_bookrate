@@ -4,7 +4,7 @@
 {% block content %}
     <article class="media content-section">
         <div class="media-body">
-            <h1>Blog home!</h1>
+            <h1>Bookrate home!</h1>
             <p>Some text to test if all works properly.</p>
         </div>
     </article>
@@ -22,7 +22,6 @@
             </div>
             <div>
                 <h3>Rate</h3>
-{#                <p>{{ rates.filter(book_id=book.id).first().rate }}</p>#}
                 {% for rate in rates %}
                     {% if rate.book_id == book.id and rate.user_id == user.id %}
                         <h3>{{ rate.rate }}</h3>
@@ -32,7 +31,7 @@
 {#              {% with some_var=2 %}#}
 {#                 {% render_partial 'rate-partial_view' arg1=40 arg2=some_var %}#}
                 {% render_partial 'book-rate' %}
-                {% render_partial 'book-rate-form' %}
+{#                {% render_partial 'book-rate-form' %}#}
 {#              {% endwith %}#}
             </div>
         </article>

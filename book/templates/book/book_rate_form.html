@@ -1,12 +1,11 @@
 {%  extends "book/base.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
-    <form method="post">
+    <form method="post" action="{% url 'book-rate-form' %}">
         {% csrf_token %}
-        {{ form.as_p }}
+        {{ form|crispy }}
         <div class="form-group">
             <button class="btn btn-outline-info" type="submit">Vote</button>
         </div>
-        <a>{{ user.id }}</a>
     </form>
 {% endblock %}
