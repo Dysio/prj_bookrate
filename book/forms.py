@@ -9,14 +9,17 @@ class RateForm(forms.ModelForm):
         widget=forms.Select(choices=RATINGS),
     )
     book = forms.CharField(label='book id')
-    user = forms.CharField(label='user id')
+    # user = forms.CharField(label='user id')
 
-    # def __init__(self, *args, **kwargs):
-    #     self.user = kwargs.pop('user')
-    #     super(RateForm, self).__init__(*args, **kwargs)
+    def __init__(self, *args, **kwargs):
+        self.user = kwargs.pop('user')  # To get request.user. Do not use kwargs.pop('user', None) due to potential security hole
+        super(RateForm, self).__init__(*args, **kwargs)
 
+    def clean(self):
+        cleaned_data = super().clean()
+        user = cleaned_data.get('user')
 
     class Meta:
         model = RateTest
-        fields = ['rate', 'book', 'user']
-        # fields = ['rate',]
+        fields = ['rate', 'book']
+        exclude = ['user']

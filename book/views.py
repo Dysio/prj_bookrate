@@ -28,12 +28,12 @@ class BookListView(ListView):
 class BookDetailView(DetailView):
     model = Book
 
-    def get_context_data(self, *, object_list=None, **kwargs):
-        context = super(BookDetailView, self).get_context_data(object_list=object_list, **kwargs)
-        form = RateForm()
-        context.update({'form':form})
-        context['rates'] = Rate.objects.all()
-        return context
+    # def get_context_data(self, *, object_list=None, **kwargs):
+    #     context = super(BookDetailView, self).get_context_data(object_list=object_list, **kwargs)
+    #     form = RateForm()
+    #     context.update({'form':form})
+    #     context['rates'] = Rate.objects.all()
+    #     return context
 
 class BookRateView(TemplateView):
     model = Rate
@@ -52,13 +52,20 @@ class BookRateFormView(FormView):
         print(Book.objects.all())
         return context
 
+    # Sending user object to the form, to verify which fields to display/remove (depending on group)
+    # def get_form_kwargs(self):
+    #     kwargs = super(BookRateFormView, self).get_form_kwargs()
+    #     kwargs.update({'user': self.request.user})
+    #     return kwargs
+
     def get(self, request, *args, **kwargs):
-        form = self.form_class(initial=self.initial)
+        form = self.form_class(initial=self.initial, user=self.request.user)
         context = {'form':form}
         return render(request, self.template_name, context)
 
     def post(self, request, *args, **kwargs):
-        form = self.form_class(request.POST)
+        form = self.form_class(request.POST, user=request.user)
+        # form = self.form_class(request.POST)
         if form.is_valid():
             messages.success(request=self.request, message="Voted!")
             form.save()
@@ -73,3 +80,21 @@ class BookRateFormView(FormView):
 
 def about_view(request):
     return render(request, 'book/about.html',{"title":"About"})
+
+def rate_view(request):
+    rate = Rate.objects.all().values()
+    # print(rate)
+    book_id_set = {elem['book_id'] for elem in rate}
+    # print(book_id_set)
+    book_rates_dict = {}
+    for elem in book_id_set:
+        book_rates_dict[elem] = []
+    # print(book_rates_dict)
+    for elem in rate:
+        if elem['book_id'] in book_rates_dict.keys():
+            book_rates_dict[elem['book_id']] += [elem['rate']]
+    print(book_rates_dict)
+    for key, value in book_rates_dict.items():
+        book_rates_dict[key] = sum(value)/len(value)
+    print(book_rates_dict)
+    return render(request, 'book/book_rate_func.html')

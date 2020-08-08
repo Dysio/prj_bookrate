@@ -44,7 +44,7 @@ class Rate(models.Model):
 class RateTest(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4)
     book = models.CharField(max_length=200)
-    user = models.CharField(max_length=200)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     rate = models.IntegerField(validators=[MinValueValidator(1),
                                            MaxValueValidator(5)])
 
