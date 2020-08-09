@@ -97,4 +97,5 @@ def rate_view(request):
     for key, value in book_rates_dict.items():
         book_rates_dict[key] = sum(value)/len(value)
     print(book_rates_dict)
-    return render(request, 'book/book_rate_func.html')
+
+    return render(request, 'book/book_rate_func.html', {'book_rates_dict': book_rates_dict})
