@@ -1,17 +1,19 @@
 from django.contrib import messages
 from django.http import HttpResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy, reverse
 from django.views.generic import DetailView, ListView, TemplateView, FormView
 from book.models import Book, Rate, RateTest
 from .forms import RateForm
 
+
 # Create your views here.
 def home_view(request):
     context = {
-        'books':Book.objects.all()
+        'books': Book.objects.all()
     }
     return render(request, 'book/home.html', context)
+
 
 class BookListView(ListView):
     model = Book
@@ -25,61 +27,60 @@ class BookListView(ListView):
         context['rates'] = Rate.objects.all()
         return context
 
+
 class BookDetailView(DetailView):
     model = Book
 
-    # def get_context_data(self, *, object_list=None, **kwargs):
-    #     context = super(BookDetailView, self).get_context_data(object_list=object_list, **kwargs)
-    #     form = RateForm()
-    #     context.update({'form':form})
-    #     context['rates'] = Rate.objects.all()
-    #     return context
 
 class BookRateView(TemplateView):
     model = Rate
     template_name = 'book/book_rate.html'
 
+
 class BookRateFormView(FormView):
     model = RateTest
     template_name = 'book/book_rate_form.html'
     form_class = RateForm
-    initial = {'key':'value'}
+    initial = {'key': 'value'}
     success_url = reverse_lazy('book-home')
 
-    def get_context_data(self, *, object_list=None, **kwargs):
-        context = super(BookRateFormView, self).get_context_data(object_list=object_list, **kwargs)
-        context['book'] = Book.objects.all()
-        print(Book.objects.all())
-        return context
-
-    # Sending user object to the form, to verify which fields to display/remove (depending on group)
-    # def get_form_kwargs(self):
-    #     kwargs = super(BookRateFormView, self).get_form_kwargs()
-    #     kwargs.update({'user': self.request.user})
-    #     return kwargs
+    # def get_context_data(self, *, object_list=None, **kwargs):
+    #     context = super(BookRateFormView, self).get_context_data(object_list=object_list, **kwargs)
+    #     context['book'] = Book.objects.all()
+    #     print(Book.objects.all())
+    #     return context
 
     def get(self, request, *args, **kwargs):
-        form = self.form_class(initial=self.initial, user=self.request.user)
-        context = {'form':form}
+        form = self.form_class(initial=self.initial)
+        print('get method')
+        # book = get_object_or_404(Book, pk=self.kwargs.get("pk"))
+        print(self.kwargs.get("pk"))
+        print(self.kwargs)
+        context = {'form': form}
         return render(request, self.template_name, context)
 
     def post(self, request, *args, **kwargs):
-        form = self.form_class(request.POST, user=request.user)
-        # form = self.form_class(request.POST)
+        form = self.form_class(request.POST)
         if form.is_valid():
+            form.instance.user = self.request.user
+            book = get_object_or_404(Book, pk=self.kwargs.get("pk"))
+            # print(book)
+            form.instance.book = book
+            # print(book)
             messages.success(request=self.request, message="Voted!")
             form.save()
             return redirect(reverse('book-home'))
         else:
             # messages.error(request=self.request, message=form.errors, extra_tags='danger')
-            messages.error(request=self.request, message='Rate test with this Book and User already exists.', extra_tags='danger')
+            messages.error(request=self.request, message='Rate test with this Book and User already exists.',
+                           extra_tags='danger')
             # return render(request, self.template_name, {'form':form})
             return redirect(reverse('book-home'))
 
 
-
 def about_view(request):
-    return render(request, 'book/about.html',{"title":"About"})
+    return render(request, 'book/about.html', {"title": "About"})
+
 
 def rate_view(request):
     rate = Rate.objects.all().values()
@@ -95,7 +96,7 @@ def rate_view(request):
             book_rates_dict[elem['book_id']] += [elem['rate']]
     print(book_rates_dict)
     for key, value in book_rates_dict.items():
-        book_rates_dict[key] = sum(value)/len(value)
+        book_rates_dict[key] = sum(value) / len(value)
     print(book_rates_dict)
 
     return render(request, 'book/book_rate_func.html', {'book_rates_dict': book_rates_dict})
